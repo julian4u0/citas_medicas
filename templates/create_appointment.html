@@ -1,0 +1,35 @@
+{% extends "layout.html" %}
+{% block content %}
+    <h1>Create appointment</h1>
+    <form action="/add_appointment" method="POST">
+        <div class="form-group">
+          <label for="inputName">Nombre</label>
+          <input type="text" class="form-control" name="patientName" id="inputName" required>
+        </div>
+        <div class="form-group">
+          <label for="inputLastname">Apellido</label>
+          <input type="text" class="form-control" name="patientLastname" id="inputLastname" required>
+        </div>
+        <div class="form-group">
+          <label for="inputDocId">Numero de documento</label>
+          <input type="number" class="form-control" name="patientDocId" id="inputDocId" required>
+        </div>
+        <div class="form-group">
+          <label for="inputBornDate">Fecha de Nacimiento DDMMYYYY</label>
+          <input type="number" class="form-control" name="patientBornDate" id="inputBornDate" required>
+        </div>
+        <div class="form-group">
+          <label for="inputCity">Ciudad de residencia</label>
+          <input type="text" class="form-control" name="patientCity" id="inputCity" required>
+        </div>
+        <div class="form-group">
+          <label for="inputDistrict">Barrio</label>
+          <input type="text" class="form-control" name="patientDistrict" id="inputDistrict" required>
+        </div>
+        <div class="form-group">
+          <label for="inputPhonenumber">Celular</label>
+          <input type="number" class="form-control" name="patientPhone" id="inputPhonenumber" required>
+        </div>
+        <button type="submit" class="btn btn-primary">Submit</button>
+      </form>
+{% endblock %}

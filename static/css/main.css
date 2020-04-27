@@ -1,3 +1,36 @@
 body{
-    background-color: blueviolet;
+    background-color: white;
+}
+
+table {
+    width: 100%;
+    border-radius: 5px;
+  }
+  
+  td, th {
+    border: 1px solid #292929;
+    text-align: left;
+    padding: 8px;
+  }
+  td:hover {
+      background-color: #b6dcff;
+  }
+  th {
+  background-color: #64b2ff;
+  color: white;
+  border: 1px solid white;
+  }
+
+  .bg-light {
+    background-color: #98ccff!important;
+}
+
+
+.im-x-mark{
+    color: red;
+    margin-right: 15px;
+}
+
+.im-edit{
+    color:darkorange;
 }

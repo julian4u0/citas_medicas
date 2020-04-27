@@ -1,11 +1,42 @@
 {% extends "layout.html" %}
 {% block content %}
+
 <div class="jumbotron">
-    <h1 class="display-4">Hello, world!</h1>
-    <p class="lead">This is a simple hero unit, a simple jumbotron-style component for calling extra attention to
-        featured content or information.</p>
+    <p class="lead">CRUD hecho en python y MongoDB con las librerias de flask y pymongo</p>
     <hr class="my-4">
-    <p>It uses utility classes for typography and spacing to space content out within the larger container.</p>
-    <a class="btn btn-primary btn-lg" href="#" role="button">Learn more</a>
+    
+    <p>Visita el repositorio en github! <a href="https://github.com/julian4u0/citas_medicas"><i class="im im-github"></i><span style="font-size:25px">/julian4u0</span></a></p>
 </div>
-{% endblock %}
+<h2>Todos los registros</h2>
+<div style="overflow-x:auto;">
+    <table>
+        <tr>
+        <th>Nombres</th>
+        <th>Apellidos</th>
+        <th>Documento</th>
+        <th>Fecha de nacimiento</th>
+        <th>Ciudad</th>
+        <th>Barrio</th>
+        <th>Celular</th>
+        <th>Acciones</th>
+        </tr>
+        {% for patient in all_patients %}
+        <tr>
+            <td>{{patient["patientName"]}}</td>
+            <td>{{patient["patientLastname"]}}</td>
+            <td>{{patient["patientDocId"]}}</td>
+            <td>{{patient["patientBornDate"]}}</td>
+            <td>{{patient["patientCity"]}}</td>
+            <td>{{patient["patientDistrict"]}}</td>
+            <td>{{patient["patientPhone"]}}</td>
+            <td><a href="url"><i class="im im-x-mark"></i></a>  <a href="url"><i class="im im-edit"></i></a>
+            </td>
+        </tr>
+        
+        {% endfor %}
+        
+        
+        
+    </table>
+</div>
+  {% endblock %}
