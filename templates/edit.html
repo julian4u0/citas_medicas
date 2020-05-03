@@ -1,0 +1,83 @@
+{% extends "layout.html" %}
+{% block content %}
+
+<form method="POST" action="/editpatient" id="formulario">
+    <input type="hidden" value='{{patient["_id"]}}' name="patientId" />
+    <div class="form-group">
+      <label for="patientName">Nombre</label>
+      <input type="text" class="form-control" name="patientName" value="{{patient["patientName"]}}" id="patientName"
+        aria-describedby="emailHelp">
+  
+    </div>
+  
+    <div class="form-group">
+      <label for="patientLastname">Apellido</label>
+      <input type="text" class="form-control" name="patientLastname" value="{{patient["patientLastname"]}}" id="patientLastname"
+        aria-describedby="emailHelp" required>
+    </div>
+  
+    <div class="form-group">
+      <label for="patientDocId">Documento</label>
+      <input type="number" class="form-control" name="patientDocId" value="{{patient["patientDocId"]}}" id="patientDocId"
+        aria-describedby="emailHelp" required>
+    </div>
+  
+    <div class="form-group">
+      <label for="patientBornDate">Fecha de nacimiento DDMMAAAA</label>
+      <input type="number" class="form-control" name="patientBornDate" value="{{patient["patientBornDate"]}}" id="patientBornDate"
+        aria-describedby="emailHelp" required>
+    </div>
+  
+  
+    <div class="form-group">
+      <label for="patientCity">Ciudad</label>
+      <input type="text" class="form-control" name="patientCity" id="patientCity" value="{{patient["patientCity"]}}"
+        aria-describedby="emailHelp" required>
+    </div>
+  
+    <div class="form-group">
+      <label for="patientDistrict">Barrio</label>
+      <input type="text" class="form-control" name="patientDistrict" id="patientDistrict" value="{{patient["patientDistrict"]}}"
+        aria-describedby="emailHelp" required>
+    </div>
+  
+    <div class="form-group">
+      <label for="patientPhone">Celular</label>
+      <input type="number" class="form-control" name="patientPhone" id="patientPhone" value="{{patient["patientPhone"]}}"
+        id="patientPhone" required>
+  
+    </div>
+    <p id="alerta" style="color: red;font-size: large;"></p>
+  
+    <p class="btn btn-primary" onclick="formSubmit()">Guardar Cambios</p>
+  
+  
+  
+  
+  </form>
+  
+  <script>
+    function formSubmit() {
+  
+      if (document.getElementById("patientName").value == ""
+        || document.getElementById("patientLastname").value == ""
+        || document.getElementById("patientDocId").value == ""
+        || document.getElementById("patientBornDate").value == ""
+        || document.getElementById("patientCity").value == ""
+        || document.getElementById("patientDistrict").value == ""
+        || document.getElementById("patientPhone").value == "") {
+        document.getElementById("alerta").innerHTML = "Debe llenar todos los campos!"
+  
+      }
+      else if (document.getElementById("patientPhone").value.length != 10) {
+  
+        document.getElementById("alerta").innerHTML = "El celular debe tener 10 numeros!"
+  
+      }
+      else {
+        document.getElementById("formulario").submit();
+      }
+    } 
+  </script>
+  <br>
+  {% endblock %}

@@ -1,4 +1,5 @@
 from flask import Flask, render_template, request, redirect, url_for
+from bson.objectid import ObjectId
 import pymongo
 import json
 
@@ -13,9 +14,7 @@ def start():
     list_patients = list(patients.find())
     return render_template('home.html', all_patients = list_patients)
 
-@app.route('/home')
-def home():
-    return render_template('home.html')
+
 
 @app.route('/create')
 def create():
@@ -44,5 +43,44 @@ def add_appointment():
 
         return redirect(url_for('start'))
 
+
+@app.route('/delete', methods=['POST'])
+def delete():
+    if request.method == "POST":
+        patientId = request.form['patientId']
+        patients.delete_one({'_id': ObjectId(patientId)})
+        
+        return redirect(url_for('start'))
+
+@app.route('/edit', methods=['POST'])
+def edit():
+    if request.method == "POST":
+        patientId = request.form['patientId']
+        
+        # insert = patients.insert_one(mypatient)
+        mypatient = patients.find_one({'_id': ObjectId(patientId) })
+        print(mypatient)
+
+        return render_template('edit.html', patient = mypatient)
+
+@app.route('/editpatient', methods=['POST'])
+def editpatient():
+    if request.method == "POST":
+        
+        patientId = request.form['patientId']
+        patientName = request.form['patientName']
+        patientLastname = request.form['patientLastname']
+        patientDocId = request.form['patientDocId']
+        patientBornDate = request.form['patientBornDate']
+        patientCity = request.form['patientCity']
+        patientDistrict = request.form['patientDistrict']
+        patientPhone = request.form['patientPhone']
+        
+        # insert = patients.insert_one(mypatient)
+        print("id" + patientId)
+        print("patientName" + patientName)
+        patients.find_one_and_update({"_id": ObjectId(patientId)}, {"$set": {"patientName": patientName, "patientLastname" : patientLastname, "patientDocId" : patientDocId, "patientBornDate" : patientBornDate, "patientCity" : patientCity, "patientDistrict" : patientDistrict, "patientPhone" : patientPhone }})
+
+        return redirect(url_for('start'))
 if __name__ == "__main__":
     app.run(debug=True)

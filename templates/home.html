@@ -7,7 +7,7 @@
     
     <p>Visita el repositorio en github! <a href="https://github.com/julian4u0/citas_medicas"><i class="im im-github"></i><span style="font-size:25px">/julian4u0</span></a></p>
 </div>
-<h2>Todos los registros</h2>
+<h2>Todos los pacientes</h2>
 <div style="overflow-x:auto;">
     <table>
         <tr>
@@ -29,7 +29,15 @@
             <td>{{patient["patientCity"]}}</td>
             <td>{{patient["patientDistrict"]}}</td>
             <td>{{patient["patientPhone"]}}</td>
-            <td><a href="url"><i class="im im-x-mark"></i></a>  <a href="url"><i class="im im-edit"></i></a>
+            <td>
+                <i class="im im-x-mark" data-toggle="modal" data-target="#exampleModal"
+                    onclick='myFunction("{{patient["_id"]}}")'></i>
+                <form action="/edit" method="POST">
+                    <input type="hidden" value="{{patient["_id"]}}" name="patientId" />
+                    <button type="submit" class="btn">
+                        <span class="im im-edit"></span>
+                    </button>
+                </form>
             </td>
         </tr>
         
@@ -39,4 +47,36 @@
         
     </table>
 </div>
-  {% endblock %}
+
+
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Alerta</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                Estas seguro de que quiere borrar?
+
+            </div>
+            <div class="modal-footer">
+                <form action="/delete" method="POST">
+                    <input type="hidden" value="asdf" name="patientId" id="patientId" />
+                    <button type="button"  class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+                    <button type="submit" class="btn btn-danger">Eliminar</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    function myFunction(strin) {
+        document.getElementById("patientId").value = strin;
+    }
+</script>
+{% endblock %}
